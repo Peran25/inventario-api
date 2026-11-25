@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres:16
+    container_name: inventario-db
+    environment:
+      POSTGRES_DB: inventario
+      POSTGRES_USER: inventario_user
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-cambia_esto}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./sql:/docker-entrypoint-initdb.d
+
+volumes:
+  pgdata:
